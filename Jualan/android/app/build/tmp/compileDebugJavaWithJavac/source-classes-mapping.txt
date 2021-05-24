@@ -1,0 +1,14 @@
+com/jualan/ReactNativeFlipper.java
+ com.jualan.ReactNativeFlipper
+ com.jualan.ReactNativeFlipper$1
+ com.jualan.ReactNativeFlipper$2
+ com.jualan.ReactNativeFlipper$2$1
+com/jualan/MainApplication.java
+ com.jualan.MainApplication
+ com.jualan.MainApplication$1
+com/jualan/BuildConfig.java
+ com.jualan.BuildConfig
+com/jualan/MainActivity.java
+ com.jualan.MainActivity
+com/facebook/react/PackageList.java
+ com.facebook.react.PackageList
