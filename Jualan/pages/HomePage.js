@@ -1,10 +1,12 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
+
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import {Colors} from '../components/style';
-
-import Icon from 'react-native-vector-icons/AntDesign';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import {Text, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 
 import TransaksiPage from './TransaksiPage';
 import HutangPage from './HutangPage';
@@ -13,7 +15,7 @@ import LainnyaPage from './LainnyaPage';
 
 const Tab = createBottomTabNavigator();
 
-const HomePage = () => {
+const HomePage = ({navigation}) => {
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
@@ -24,15 +26,17 @@ const HomePage = () => {
           const unfocusColor = Colors.thirdColor;
           switch (route.name) {
             case 'Transaksi':
-              iconName = 'home';
+              iconName = 'book';
               break;
             case 'Hutang':
-              iconName = 'mail';
+              iconName = 'credit-card';
               break;
+
             case 'Stok':
-              iconName = 'tag';
+              iconName = 'barcode';
+              break;
             case 'Lainnya':
-              iconName = 'tool';
+              iconName = 'user';
               break;
           }
           if (focused) {
@@ -40,7 +44,7 @@ const HomePage = () => {
           } else {
             iconColor = unfocusColor;
           }
-          return <Icon name={iconName} size={25} color={iconColor} />;
+          return <Icon name={iconName} size={20} color={iconColor} /> ;
         },
       })}
       tabBarOptions={{
@@ -64,5 +68,4 @@ const pageStyle = StyleSheet.create({
     backgroundColor: Colors.bgColor,
   },
 });
-
 export default HomePage;
