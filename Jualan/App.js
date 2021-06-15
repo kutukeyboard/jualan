@@ -22,7 +22,7 @@ const App = () => {
         screenOptions={{
           headerTitleStyle: {fontSize: 16},
           headerTitleAlign: 'center',
-          headerTintColor: '#607D8B',
+          headerTintColor: '#88ffff',
           headerStyle: {height: 40},
           animationEnabled: false,
         }}>

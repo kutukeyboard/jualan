@@ -1,4 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
+import moment from 'moment';
+
 import {
   FlatList,
   View,
@@ -8,73 +11,85 @@ import {
   StyleSheet,
 } from 'react-native';
 
+moment.locale('en');
+
 const TransaksiPage = () => {
-  const [addTransaction, setAddTransaction] = useState('');
-
   const [transaction, setTransaction] = useState([]);
-
-  const addTransactionHandle = addTransaction => {
-    setAddTransaction(addTransaction);
+  var config = {
+    method: 'get',
+    url: 'http://10.0.2.2:5000/jualan-54144/asia-east2/api/transaction',
+    headers: {},
   };
 
-  const transactionHandler = () => {
-    setTransaction(current => [
-      ...current,
-      {key: Math.random().toString(), value: addTransaction},
-    ]);
-    setAddTransaction();
+  useEffect(() => {
+    getTransaction();
+  }, []);
+
+  const getTransaction = () => {
+    axios(config).then(
+      response => {
+        console.log(response.data);
+        setTransaction(response.data);
+      },
+      error => {
+        console.log(error);
+      },
+    );
   };
+
   return (
     <View style={styles.screen}>
-      <View style={styles.inputContainer}>
-        <TextInput
-          placeholder="Tambah Transaksi"
-          style={styles.input}
-          onChangeText={addTransactionHandle}
-          value={addTransaction}
-        />
-        <Button title="Tambah" onPress={transactionHandler} />
+      {/* Transaction */}
+      <View style={styles.itemWrapper}>
+        <Text style={styles.sectionTitle}>Transaksi</Text>
       </View>
-      <View>
-        <FlatList
-          data={transaction}
-          renderItem={dataItem => (
-            <View style={styles.listItem}>
-              <Text style={styles.listListDate}>01/01/11</Text>
-              <Text>Rp {dataItem.item.value} </Text>
-            </View>
-          )}></FlatList>
-      </View>
+
+      <FlatList
+        style={styles.item}
+        data={transaction}
+        keyExtractor={(item, index) => 'key' + index}
+        renderItem={({item}) => (
+          <View style={styles.itemColumn}>
+            <Text style={[styles.item, styles.itemDate]}>
+              [{moment('2011-06-12T00:00:00').format('D/MM')}]
+            </Text>
+            <Text style={[styles.item, styles.itemName]}>{item.name}</Text>
+            <Text style={[styles.item, styles.itemPrice]}>
+              Rp {item.amaunt}
+            </Text>
+          </View>
+        )}></FlatList>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  screen: {
-    padding: 5,
+  itemWrapper: {
+    paddingTop: 10,
+    paddingHorizontal: 20,
   },
-  inputContainer: {
+  sectionTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  itemColumn: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignContent: 'center',
   },
-  input: {
-    width: '80%',
-
-    color: 'black',
+  item: {
     padding: 10,
+    margin: 10,
   },
 
-  listItem: {
-    padding: 5,
-    margin: 5,
-    backgroundColor: '#ccc',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignContent: 'center',
+  itemPrice: {
+    fontSize: 16,
+    fontWeight: 'bold',
   },
-  listListDate: {
-    fontSize: 12,
+  itemName: {
+    fontSize: 16,
+  },
+  itemDate: {
+    fontSize: 14,
   },
 });
 

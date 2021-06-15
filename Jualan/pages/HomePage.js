@@ -44,7 +44,7 @@ const HomePage = ({navigation}) => {
           } else {
             iconColor = unfocusColor;
           }
-          return <Icon name={iconName} size={20} color={iconColor} /> ;
+          return <Icon name={iconName} size={20} color={iconColor} />;
         },
       })}
       tabBarOptions={{

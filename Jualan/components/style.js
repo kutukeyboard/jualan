@@ -4,7 +4,7 @@ import {round} from 'react-native-reanimated';
 export const Colors = {
   textColor: '#333',
   bgDark: '#666',
-  primaryColor: '#1A73E8',
+  primaryColor: '#00acc1',
   secondaryColor: '#455A64',
   thirdColor: '#607D8B',
   lightColor: '#BBD7EA',
